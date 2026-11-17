@@ -34,3 +34,20 @@ psql -U postgres -d helpdesk -f database/queries.sql
 ```bash
 psql -U postgres -d helpdesk -f database/queries.sql -o docs/query-results.txt
 ```
+
+## Frontend Set-up
+**BE SURE TO BE IN FRONTEND FOLDER**
+* Install requirements
+```bash
+npm install
+```
+
+* Install dependencies
+```bash
+npm install react-router-dom
+```
+
+* Run Frontend
+```bash
+npm run dev
+```
