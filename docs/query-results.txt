@@ -1,0 +1,76 @@
+ ticket_id |                      title                      |     requester     |          contact          | department  | category | priority | current_status | latest_logged_status |  status_set_by   |          status_set_at           
+-----------+-------------------------------------------------+-------------------+---------------------------+-------------+----------+----------+----------------+----------------------+------------------+----------------------------------
+        10 | Wi-Fi very slow in conference room B            | Daniel Joseph     | daniel.joseph@company.com | Engineering |          |          | New            | New                  | Daniel Joseph    | 2026-11-17 09:48:19.458372+05:30
+         8 | Excel macros disabled after update              | Priya Sharma      | priya.sharma@company.com  | Finance     | Software |          | New            | New                  | Priya Sharma     | 2026-11-17 09:18:19.458372+05:30
+         1 | Wireless keyboard not responding                | Priya Sharma      | priya.sharma@company.com  | Finance     |          |          | New            | New                  | Priya Sharma     | 2026-11-17 08:18:19.458372+05:30
+         5 | VPN disconnects every 10 minutes                | Daniel Joseph     | daniel.joseph@company.com | Engineering | Network  |          | New            | New                  | Daniel Joseph    | 2026-11-17 05:18:19.458372+05:30
+         6 | Laptop battery swollen and trackpad lifting     | Fatima Khan       | emp10452                  | Operations  | Hardware | High     | In Progress    | In Progress          | Anita Desai (IT) | 2026-11-17 04:53:19.458372+05:30
+         2 | Finance shared drive down for entire department | Priya Sharma      | priya.sharma@company.com  | Finance     | Network  | High     | In Progress    | In Progress          | Ravi Kumar (IT)  | 2026-11-16 10:33:19.458372+05:30
+         4 | Outlook crashes when opening attachments        | Arjun Mehta       | arjun.mehta@company.com   | Sales       | Software | Medium   | In Progress    | In Progress          | Ravi Kumar (IT)  | 2026-11-15 12:18:19.458372+05:30
+         3 | Cannot log in to HR portal after password reset | Lakshmi Narayanan | lakshmi.n@company.com     | HR          | Access   | Medium   | Resolved       | Resolved             | Anita Desai (IT) | 2026-11-14 14:18:19.458372+05:30
+         9 | Third floor printer keeps jamming               | Fatima Khan       | emp10452                  | Operations  | Hardware | Low      | Resolved       | Resolved             | Anita Desai (IT) | 2026-11-16 10:18:19.458372+05:30
+         7 | Request access to Sales CRM dashboards          | Arjun Mehta       | arjun.mehta@company.com   | Sales       | Access   | Low      | Resolved       | Resolved             | Ravi Kumar (IT)  | 2026-11-11 14:18:19.458372+05:30
+(10 rows)
+
+ id |                      title                      |  requester   | department | category | priority |   status    |            created_at            
+----+-------------------------------------------------+--------------+------------+----------+----------+-------------+----------------------------------
+  2 | Finance shared drive down for entire department | Priya Sharma | Finance    | Network  | High     | In Progress | 2026-11-16 10:18:19.458372+05:30
+  6 | Laptop battery swollen and trackpad lifting     | Fatima Khan  | Operations | Hardware | High     | In Progress | 2026-11-17 04:18:19.458372+05:30
+(2 rows)
+
+   status    | ticket_count 
+-------------+--------------
+ New         |            4
+ In Progress |            3
+ Resolved    |            3
+(3 rows)
+
+  priority  | ticket_count 
+------------+--------------
+ Unassigned |            4
+ Medium     |            2
+ High       |            2
+ Low        |            2
+(4 rows)
+
+   status    | high | medium | low | unassigned | total 
+-------------+------+--------+-----+------------+-------
+ New         |    0 |      0 |   0 |          4 |     4
+ In Progress |    2 |      1 |   0 |          0 |     3
+ Resolved    |    0 |      1 |   2 |          0 |     3
+(3 rows)
+
+ department  | open_tickets | all_tickets 
+-------------+--------------+-------------
+ Finance     |            3 |           3
+ Engineering |            2 |           2
+ Operations  |            1 |           2
+ Sales       |            1 |           2
+ HR          |            0 |           1
+(5 rows)
+
+ total_reviews | accepted | corrected | useful_pct 
+---------------+----------+-----------+------------
+             3 |        1 |         2 |       66.7
+(1 row)
+
+ ticket_id |                      title                      | ai_category | confirmed_category | ai_priority | confirmed_priority | staff_decision | is_useful |    staff_name    
+-----------+-------------------------------------------------+-------------+--------------------+-------------+--------------------+----------------+-----------+------------------
+         1 | Wireless keyboard not responding                | Hardware    |                    | Low         |                    |                |           | 
+         2 | Finance shared drive down for entire department | Network     | Network            | High        | High               | ACCEPTED       | t         | Ravi Kumar (IT)
+         3 | Cannot log in to HR portal after password reset | Software    | Access             | Medium      | Medium             | CORRECTED      | t         | Anita Desai (IT)
+         6 | Laptop battery swollen and trackpad lifting     | Hardware    | Hardware           | Medium      | High               | CORRECTED      | f         | Anita Desai (IT)
+(4 rows)
+
+            created_at            |  activity_type  | old_status  | new_status  | old_value | new_value |                         note                         |   performed_by   
+----------------------------------+-----------------+-------------+-------------+-----------+-----------+------------------------------------------------------+------------------
+ 2026-11-13 10:18:19.458372+05:30 | CREATED         |             | New         |           |           | Ticket created                                       | Fatima Khan
+ 2026-11-13 11:18:19.458372+05:30 | CATEGORY_CHANGE |             |             |           | Hardware  |                                                      | Anita Desai (IT)
+ 2026-11-13 11:18:19.458372+05:30 | PRIORITY_CHANGE |             |             |           | Low       |                                                      | Anita Desai (IT)
+ 2026-11-13 12:18:19.458372+05:30 | STATUS_CHANGE   | New         | In Progress |           |           | Technician visiting third floor                      | Anita Desai (IT)
+ 2026-11-13 14:18:19.458372+05:30 | STATUS_CHANGE   | In Progress | Resolved    |           |           | Cleared jammed paper and cleaned rollers             | Anita Desai (IT)
+ 2026-11-15 10:18:19.458372+05:30 | STATUS_CHANGE   | Resolved    | In Progress |           |           | Employee reported jamming again; ticket reopened     | Anita Desai (IT)
+ 2026-11-15 11:18:19.458372+05:30 | COMMENT         |             |             |           |           | Pickup roller is worn out. Replacement part ordered. | Anita Desai (IT)
+ 2026-11-16 10:18:19.458372+05:30 | STATUS_CHANGE   | In Progress | Resolved    |           |           | Pickup roller replaced; test prints OK               | Anita Desai (IT)
+(8 rows)
+
