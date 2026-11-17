@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../../api/client";
 import { useApi } from "../../api/useApi";
+import AIPanel from "../../components/ai/AIPanel";
 import Badge from "../../components/common/Badge";
 import ErrorMessage, { fieldErrors } from "../../components/common/ErrorMessage";
 import Field from "../../components/common/Field";
@@ -107,7 +108,12 @@ export default function TicketProcessing() {
             <p className="description">{ticket.description}</p>
           </section>
 
-          {/* AI recommendations panel goes here (AI step) */}
+          <AIPanel
+            key={ticket.id}
+            ticketId={ticket.id}
+            staffName={staffName}
+            onFeedback={async () => setData(await api.getTicket(id))}
+          />
 
           <section className="panel">
             <h2>History</h2>

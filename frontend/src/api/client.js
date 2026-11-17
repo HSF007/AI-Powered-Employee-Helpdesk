@@ -62,5 +62,8 @@ export const api = {
   // Dashboard
   getSummary: () => request("/api/summary"),
 
-  // AI endpoints are added in the AI step
+  // AI (advisory only - staff confirm or correct via feedback)
+  analyzeTicket: (id) => request(`/api/tickets/${id}/ai/analyze`, { method: "POST" }),
+  getSuggestion: (id) => request(`/api/tickets/${id}/ai/suggestion`),
+  sendFeedback: (id, data) => request(`/api/tickets/${id}/ai/feedback`, { method: "POST", body: data }),
 };

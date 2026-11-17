@@ -60,7 +60,7 @@ def health():
 
 
 # Routers are added in later steps:
-# from app.routers import tickets, summary, ai
+from app.routers import tickets, summary, ai
 app.include_router(tickets.router)
 app.include_router(summary.router)
-# app.include_router(ai.router)
+app.include_router(ai.router)

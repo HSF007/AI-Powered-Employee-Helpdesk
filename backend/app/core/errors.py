@@ -61,7 +61,7 @@ async def validation_error_handler(request: Request, exc: RequestValidationError
         fields.append({"field": ".".join(loc) or "request", "message": _clean_msg(err.get("msg", "Invalid value"))})
     logger.info("Validation failed on %s %s (%d field errors)", request.method, request.url.path, len(fields))
     return JSONResponse(
-        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        status_code=422,  # Unprocessable Content
         content=_body("validation_error", "Some fields are missing or invalid.", fields),
     )
 

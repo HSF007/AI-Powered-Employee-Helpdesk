@@ -1,0 +1,38 @@
+/* AI panel - builds on the shared .panel / .btn / .alert / .badge styles in index.css */
+.ai-panel { border-top: 3px solid var(--brand); }
+.ai-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.ai-head h2 { margin: 0; }
+.ai-badge { background: var(--new-bg); color: var(--new); }
+
+.ai-result {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 8px 16px;
+  margin: 0 0 16px;
+}
+.ai-result dt { font-weight: 600; color: var(--ink-soft); }
+.ai-result dd { margin: 0; }
+
+.ai-subhead { font-size: 1rem; margin: 0 0 8px; }
+.ai-steps { margin: 0 0 12px; padding-left: 20px; }
+.ai-steps li { margin-bottom: 4px; }
+.ai-meta { font-size: 0.85rem; }
+
+.ai-link {
+  background: none; border: none; padding: 0;
+  color: var(--brand); text-decoration: underline; cursor: pointer; font: inherit;
+}
+
+.ai-feedback { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 4px; }
+.ai-useful { border: none; padding: 0; margin: 0; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.ai-useful legend { margin-bottom: 6px; padding: 0; width: 100%; }
+.ai-useful label { display: inline-flex; gap: 6px; align-items: center; }
+
+.ai-unavailable { background: var(--medium-bg); border-color: var(--medium); color: var(--ink); }
+.ai-unavailable p { margin: 6px 0; }
+.ai-unavailable-hint { color: var(--ink-soft); font-size: 0.88rem; }
+.ai-unavailable .btn { margin-top: 6px; }
+
+@media (max-width: 600px) {
+  .ai-feedback .form-row { grid-template-columns: 1fr; }
+}
