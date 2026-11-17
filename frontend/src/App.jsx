@@ -1,122 +1,65 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { Link, Navigate, NavLink, Route, Routes } from "react-router-dom";
+import SectionLayout from "./components/layout/SectionLayout";
+import Home from "./pages/Home";
+import MyTickets from "./pages/employee/MyTickets";
+import RaiseTicket from "./pages/employee/RaiseTicket";
+import TicketDetails from "./pages/employee/TicketDetails";
+import Dashboard from "./pages/support/Dashboard";
+import TicketProcessing from "./pages/support/TicketProcessing";
+import WorkQueue from "./pages/support/WorkQueue";
 
-function App() {
-  const [count, setCount] = useState(0)
+const EMPLOYEE_LINKS = [
+  { to: "/employee/new", label: "Raise a ticket" },
+  { to: "/employee/tickets", label: "My tickets" },
+];
 
+const SUPPORT_LINKS = [
+  { to: "/support", label: "Dashboard", end: true },
+  { to: "/support/queue", label: "Work queue" },
+];
+
+export default function App() {
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      <header className="topbar">
+        <Link to="/" className="brand">
+          <span className="ticket-id brand-mark">IT</span>
+          Helpdesk
+        </Link>
+        <nav className="menu" aria-label="Main">
+          <NavLink to="/" end>Home</NavLink>
+          <NavLink to="/employee">Employee</NavLink>
+          <NavLink to="/support">Support</NavLink>
+        </nav>
+      </header>
 
-      <div className="ticks"></div>
+      <Routes>
+        <Route path="/" element={<main className="container"><Home /></main>} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <Route path="/employee" element={<SectionLayout name="Employee" tone="employee" links={EMPLOYEE_LINKS} />}>
+          <Route index element={<Navigate to="new" replace />} />
+          <Route path="new" element={<RaiseTicket />} />
+          <Route path="tickets" element={<MyTickets />} />
+          <Route path="tickets/:id" element={<TicketDetails />} />
+        </Route>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+        <Route path="/support" element={<SectionLayout name="Support" tone="support" links={SUPPORT_LINKS} />}>
+          <Route index element={<Dashboard />} />
+          <Route path="queue" element={<WorkQueue />} />
+          <Route path="tickets/:id" element={<TicketProcessing />} />
+        </Route>
+
+        <Route
+          path="*"
+          element={
+            <main className="container">
+              <div className="empty">
+                This page does not exist. <Link to="/">Go to the helpdesk home</Link>.
+              </div>
+            </main>
+          }
+        />
+      </Routes>
     </>
-  )
+  );
 }
-
-export default App
